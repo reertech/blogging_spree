@@ -50,7 +50,6 @@ es:
     blog_author: Autor
     admin:
       tab:
-        blog: Blog
         blog_entries: Blog
     blog:
       ago: atras

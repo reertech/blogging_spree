@@ -5,7 +5,7 @@ Gem::Specification.new do |s|
   s.version     = '3.0.0'
   s.summary     = 'BloggingSpree: A Spree blogging solution'
   s.description = 'A basic blogging solution for use with the Spree E-Commerce platform.'
-  s.required_ruby_version = '>= 1.9.3'
+  s.required_ruby_version = '>= 2.2.0'
 
   s.author    = 'Stefan Senk, Sumit Sharma'
   s.email     = 'forever.sumitsharma@gmail.com'
@@ -17,18 +17,21 @@ Gem::Specification.new do |s|
   s.requirements << 'none'
 
   s.add_dependency 'spree_core', '~> 3.0'
-  s.add_dependency 'acts-as-taggable-on', '~> 4.0'
+  s.add_dependency 'acts-as-taggable-on', '~> 6.0'
 
-  s.add_development_dependency 'capybara', '~> 2.2.1'
-  s.add_development_dependency 'coffee-rails', '~> 4.0.0'
-  s.add_development_dependency 'database_cleaner', '1.2.0'
-  s.add_development_dependency 'factory_girl', '~> 4.4'
+  s.add_development_dependency 'capybara', '~> 2.18'
+  s.add_development_dependency 'coffee-rails'
+  s.add_development_dependency 'database_cleaner'
+  s.add_development_dependency 'factory_bot', '~> 4.11'
   s.add_development_dependency 'ffaker'
-  s.add_development_dependency 'rspec-rails',  '~> 2.14'
-  s.add_development_dependency 'sass-rails', '~> 4.0.0'
+  s.add_development_dependency 'rspec-rails', '~> 3.6'
+  s.add_development_dependency 'sass-rails', '~> 5.0'
   s.add_development_dependency 'selenium-webdriver'
   s.add_development_dependency 'simplecov', '~> 0.7.1'
-  s.add_development_dependency 'sqlite3'
+  s.add_development_dependency 'sqlite3', '~> 1.3.6'
   s.add_development_dependency 'launchy'
+  s.add_development_dependency 'puma', '~> 4.0'
+  s.add_development_dependency 'byebug'
+  s.add_development_dependency 'pry'
 
 end

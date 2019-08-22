@@ -44,8 +44,8 @@ describe "Blog Entry", :js => true do
       page.should have_content("New body")
       page.should have_content("New summary")
       find_field('blog_entry_title').value.should == "New title"
-      find_field('blog_entry_tag_list').value.should == "tag1 tag2"
-      find_field('blog_entry_category_list').value.should == "cat1 cat2"
+      find_field('blog_entry_tag_list').value.should == "tag1, tag2"
+      find_field('blog_entry_category_list').value.should == "cat1, cat2"
       find_field('blog_entry_published_at').value.should == "2013/02/01"
       find_field('blog_entry_visible').value.should == "1"
       find_field('blog_entry_permalink').value.should == "some-permalink-path"

@@ -5,6 +5,7 @@ class Spree::BlogEntriesController < Spree::StoreController
   rescue_from ActiveRecord::RecordNotFound, :with => :render_404
 
   def index
+    byebug
     @blog_entries = Spree::BlogEntry.visible.page(@pagination_page).per(@pagination_per_page)
   end
 

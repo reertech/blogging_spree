@@ -12,9 +12,9 @@ class Spree::BlogEntry < ActiveRecord::Base
   scope :recent, lambda{|max=5| visible.limit(max) }
 
   if Spree.user_class
-    belongs_to :author, :class_name => Spree.user_class.to_s
+    belongs_to :author, :class_name => Spree.user_class.to_s, optional: true
   else
-    belongs_to :author
+    belongs_to :author, optional: true
   end
 
   has_one :blog_entry_image, :as => :viewable, :dependent => :destroy, :class_name => 'Spree::BlogEntryImage'

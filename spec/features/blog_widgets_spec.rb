@@ -95,6 +95,5 @@ describe "BlogEntries" do
     end
   end
 
-
 end
 

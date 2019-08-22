@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "BlogEntries with alternative route" do
+RSpec.feature "BlogEntries with alternative route" do
   before(:all) do 
     Spree::Config['blog_alias'] = 'news'
     Rails.application.reload_routes!

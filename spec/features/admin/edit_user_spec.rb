@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "User" do
+RSpec.feature "User" do
   context "as admin user" do
     before(:each) do
       Spree::Role.find_or_create_by(name: 'blogger')

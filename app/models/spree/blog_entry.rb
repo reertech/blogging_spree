@@ -33,6 +33,8 @@ class Spree::BlogEntry < ActiveRecord::Base
       keys = [:day, :month, :year].select {|key| date.include?(key) }
       period = keys.first.to_s
       date = DateTime.new(*keys.reverse.map {|key| date[key].to_i })
+    elsif date.is_a?(ActionController::Parameters)
+      by_date(date.to_unsafe_h, period = nil)
     end
 
     time = date.to_time.in_time_zone

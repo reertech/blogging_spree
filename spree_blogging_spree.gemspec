@@ -16,10 +16,10 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
   s.requirements << 'none'
 
-  s.add_dependency 'spree_core', '~> 3.0'
+  s.add_dependency 'spree_core', '~> 3.7.0'
   s.add_dependency 'acts-as-taggable-on', '~> 6.0'
 
-  s.add_development_dependency 'capybara', '~> 2.18'
+  s.add_development_dependency 'capybara'
   s.add_development_dependency 'coffee-rails'
   s.add_development_dependency 'database_cleaner'
   s.add_development_dependency 'factory_bot', '~> 4.11'

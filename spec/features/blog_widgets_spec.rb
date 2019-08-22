@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "BlogEntries" do
+RSpec.feature "BlogEntries" do
   before(:each) do
     @blog_entry = create(:blog_entry, 
       :title => "First blog entry", 

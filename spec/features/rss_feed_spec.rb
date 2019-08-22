@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "RSS Feed" do
+RSpec.feature "RSS Feed" do
   context "with a blog entry" do
     before(:each) do
       @blog_entry = create(:blog_entry, 

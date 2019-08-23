@@ -64,17 +64,19 @@ RSpec.configure do |config|
   # to setup a test will be unavailable to the browser, which runs under a separate server instance.
   config.use_transactional_fixtures = false
 
+  # Ensure Suite is set to use transactions for speed.
   config.before :suite do
-    DatabaseCleaner.clean_with(:truncation)
+    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.clean_with :truncation
   end
 
-  config.after :each do |example|
-    DatabaseCleaner.strategy =
-      example.metadata[:database_cleaner_strategy] ||
-        (example.metadata[:js] ? :truncation : :transaction)
+  # Before each spec check if it is a Javascript test and switch between using database transactions or not where necessary.
+  config.before :each do
+    DatabaseCleaner.strategy = RSpec.current_example.metadata[:js] ? :truncation : :transaction
     DatabaseCleaner.start
   end
 
+  # After each spec clean the database.
   config.after :each do
     DatabaseCleaner.clean
   end
@@ -89,5 +91,9 @@ RSpec.configure do |config|
   config.run_all_when_everything_filtered = true
 end
 
-Capybara.default_driver = :selenium_chrome
-Capybara.javascript_driver = :selenium_chrome
+Capybara.register_driver :chrome do |app|
+  Capybara::Selenium::Driver.new(app, browser: :chrome)
+end
+
+Capybara.javascript_driver = :chrome
+Capybara.default_max_wait_time = 10

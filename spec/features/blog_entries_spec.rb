@@ -1,54 +1,36 @@
 require 'spec_helper'
-require 'byebug'
-require 'pry'
 
 RSpec.feature "BlogEntries" do
-  let!(:author) { create(:user, :nickname => "Torony Polser") }
+  before(:each) do
+    @author = create(:user, :email => "me@example.com", :nickname => "Torony Polser")
+    @author.spree_roles << Spree::Role.find_or_create_by(name: 'blogger')
 
-  let!(:blog_entry) do
-    create(
-      :blog_entry,
-      :title => "First blog entry",
-      :body => "Body of the blog entry.",
-      :summary => "Summary of the blog entry.",
-      :author => author,
-      :published_at => DateTime.new(2020, 3, 11)
-    )
-  end
+    @blog_entry = create(:blog_entry,
+                         :title => "First blog entry",
+                         :body => "Body of the blog entry.",
+                         :summary => "Summary of the blog entry.",
+                         :author => @author,
+                         :published_at => DateTime.new(2020, 3, 11))
+    @blog_entry.tag_list = "baz, bob"
+    @blog_entry.category_list = "cat1"
+    @blog_entry.save!
 
-  let!(:blog_entry2) do
-    create(
-      :blog_entry,
-      :title => "Another blog entry",
-      :body => "Another body.",
-      :summary => "",
-      :published_at => DateTime.new(2020, 2, 4)
-    )
-  end
+    @blog_entry2 = create(:blog_entry,
+                          :title => "Another blog entry",
+                          :body => "Another body.",
+                          :summary => "",
+                          :published_at => DateTime.new(2020, 2, 4))
+    @blog_entry2.tag_list = "bob, ben"
+    @blog_entry2.category_list = "cat1, cat2"
+    @blog_entry2.save!
 
-  let!(:blog_entry3) do
-    create(
-      :blog_entry,
-      :title => "Invisible blog entry",
-      :visible => false,
-      :published_at => DateTime.new(2020, 3, 11)
-    )
-  end
-
-  subject!(:load_data) do
-    author.spree_roles << Spree::Role.find_or_create_by(name: 'blogger')
-
-    blog_entry.tag_list = "baz, bob"
-    blog_entry.category_list = "cat1"
-    blog_entry.save!
-
-    blog_entry2.tag_list = "bob, ben"
-    blog_entry2.category_list = "cat1, cat2"
-    blog_entry2.save!
-
-    blog_entry3.tag_list = "baz, bob"
-    blog_entry3.category_list = "cat3"
-    blog_entry3.save!
+    @blog_entry3 = create(:blog_entry,
+                          :title => "Invisible blog entry",
+                          :visible => false,
+                          :published_at => DateTime.new(2020, 3, 11))
+    @blog_entry3.tag_list = "baz, bob"
+    @blog_entry3.category_list = "cat3"
+    @blog_entry3.save!
   end
 
   context "index page" do
@@ -113,7 +95,7 @@ RSpec.feature "BlogEntries" do
       find('#content').should have_content("11 Mar 2020")
     end
     it "should include google authorship" do
-      author.update_attribute(:google_plus_url, 'https://example.com/123/')
+      @author.update_attribute(:google_plus_url, 'https://example.com/123/')
       visit "/blog/2020/03/11/first-blog-entry"
       page.should have_css("link[rel='author'][href='https://example.com/123/']", visible: false)
     end
@@ -181,8 +163,8 @@ RSpec.feature "BlogEntries" do
       find('#content').should have_content("Summary of the blog entry.")
     end
     it "should display the author's details" do
-      author.update_attribute(:website_url, 'http://example.com/')
-      author.update_attribute(:bio_info, 'The author summary.')
+      @author.update_attribute(:website_url, 'http://example.com/')
+      @author.update_attribute(:bio_info, 'The author summary.')
       visit "/blog/author/Torony%20Polser"
       find('#content').should have_content("Torony Polser")
       find('#content').should have_content("example.com")

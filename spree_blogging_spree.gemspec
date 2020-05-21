@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
   s.requirements << 'none'
 
-  s.add_dependency 'spree_core', '~> 3.7.0'
+  s.add_dependency 'spree_core', '~> 4.0'
   s.add_dependency 'acts-as-taggable-on', '~> 6.0'
 
   s.add_development_dependency 'capybara'
@@ -28,7 +28,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'sass-rails', '~> 5.0'
   s.add_development_dependency 'selenium-webdriver'
   s.add_development_dependency 'simplecov', '~> 0.7.1'
-  s.add_development_dependency 'sqlite3', '~> 1.3.6'
+  s.add_development_dependency 'sqlite3', '~> 1.4'
   s.add_development_dependency 'launchy'
   s.add_development_dependency 'puma', '~> 4.0'
 
